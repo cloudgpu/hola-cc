@@ -1,0 +1,4 @@
+// expect: undefined: y
+func main() {
+    x := y + 1
+}

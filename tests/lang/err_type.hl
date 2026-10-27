@@ -1,0 +1,5 @@
+// expect: cannot use string as int
+func main() {
+    x := 1
+    x = "a"
+}

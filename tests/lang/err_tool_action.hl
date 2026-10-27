@@ -1,0 +1,4 @@
+// expect: unknown action 'ftp'
+tool get(url string) = ftp "{{url}}"
+agent A {
+}

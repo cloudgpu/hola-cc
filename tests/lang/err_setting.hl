@@ -1,0 +1,5 @@
+// expect: unknown agent setting 'colour'
+agent A {
+    colour "blue"
+}
+func main() {}

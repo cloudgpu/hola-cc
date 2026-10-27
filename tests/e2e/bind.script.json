@@ -1,0 +1,9 @@
+[
+  {"tool": "shout", "args": {"text": "hi'; touch pwned; echo '"}},
+  {"tool": "save", "args": {"name": "../escape", "text": "nope"}},
+  {"tool": "save", "args": {"name": "ok", "text": "data"}},
+  {"tool": "ask_helper", "args": {"prompt": "say hi"}},
+  {"text": "helper says hi"},
+  {"tool": "submit_result", "args": {"result": "fine"}},
+  {"text": "done"}
+]

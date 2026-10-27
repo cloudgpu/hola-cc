@@ -1,0 +1,48 @@
+// Reviews a diff and reports findings.
+agent Reviewer extends coder {
+    persona "You review code changes strictly."
+    goal "Find real bugs, not style issues."
+    tools ["fs", "search"]
+    deny ["write_file"]
+    max_turns 12
+    input {
+        diff string "the unified diff to review"
+    }
+    output {
+        verdict string "approve or reject"
+        findings []Finding
+    }
+    task "Review this diff:\n{{diff}}"
+
+    // Counts the lines of a file.
+    func count_lines(path string) int {
+        return len(split(read_file(path), "\n"))
+    }
+}
+
+type Finding struct {
+    file string
+    line int
+    text string
+}
+
+abstract agent Security {
+    persona "Also look for security issues: injection, secrets, unsafe paths."
+    skills ["security-review"]
+    tools ["grep"]
+}
+
+agent StrictReviewer extends Reviewer, Security {
+    persona "Reject when in doubt."
+    input {
+        severity int
+    }
+}
+
+agent Chat {
+    persona "You are friendly."
+}
+
+func main() {
+    println("agents declared")
+}

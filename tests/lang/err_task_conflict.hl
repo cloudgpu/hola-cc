@@ -1,0 +1,10 @@
+// expect: parents have different tasks
+abstract agent A {
+    task "do a"
+}
+abstract agent B {
+    task "do b"
+}
+agent C extends A, B {
+}
+func main() {}

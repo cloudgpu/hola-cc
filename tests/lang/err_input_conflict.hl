@@ -1,0 +1,14 @@
+// expect: input field n is int in one parent and string in another
+abstract agent A {
+    input {
+        n int
+    }
+}
+abstract agent B {
+    input {
+        n string
+    }
+}
+agent C extends A, B {
+}
+func main() {}

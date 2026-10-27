@@ -1,0 +1,9 @@
+// Uses Hola's own read_file tool through the prelude's reader agent.
+agent FileAsker extends reader {
+    deny ["search_code"]
+    skills ["brief"]
+    output {
+        first_line string
+    }
+}
+

@@ -1,0 +1,5 @@
+// expect: {{who}} is not one of its parameters
+tool greet(name string) = print "hi {{who}}"
+agent A {
+    tools [greet]
+}

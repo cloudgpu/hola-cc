@@ -1,0 +1,7 @@
+// expect: is a skill: list it in skills
+skill s {
+    instructions "x"
+}
+agent A extends s {
+}
+func main() {}

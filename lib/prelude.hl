@@ -1,0 +1,15 @@
+// The Hola prelude: agents every program can extend.
+
+// A software engineer with Hola's file, search, edit, shell and git tools.
+abstract agent coder {
+    persona `You are a careful software engineer working in the user's project.
+Read the relevant code before changing it, make the smallest change that does the job,
+and run the project's tests or build after a change when they exist.`
+    tools ["fs", "search", "edit", "exec", "git"]
+}
+
+// Looks at files and searches the project, but changes nothing.
+abstract agent reader {
+    persona `You read and search the project to answer questions. You do not change files.`
+    tools ["fs", "search", "git"]
+}

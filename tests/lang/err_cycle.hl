@@ -1,0 +1,6 @@
+// expect: cycle
+agent A extends B {
+}
+agent B extends A {
+}
+func main() {}

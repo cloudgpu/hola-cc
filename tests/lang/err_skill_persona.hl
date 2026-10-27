@@ -1,0 +1,5 @@
+// expect: belongs in an agent
+skill s {
+    persona "x"
+}
+func main() {}

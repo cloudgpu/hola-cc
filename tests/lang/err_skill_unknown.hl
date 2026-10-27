@@ -1,0 +1,5 @@
+// expect: is not a skill declared
+agent A {
+    skills [nope]
+}
+func main() {}

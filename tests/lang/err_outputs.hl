@@ -1,0 +1,14 @@
+// expect: parents declare different outputs
+abstract agent A {
+    output {
+        a string
+    }
+}
+abstract agent B {
+    output {
+        b int
+    }
+}
+agent C extends A, B {
+}
+func main() {}

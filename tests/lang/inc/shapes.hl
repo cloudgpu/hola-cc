@@ -1,0 +1,15 @@
+type Size struct {
+    w int
+    h int
+}
+
+type Box struct {
+    name string
+    size Size
+    open bool
+    tags []string
+}
+
+func area(b Box) int {
+    return b.size.w * b.size.h
+}

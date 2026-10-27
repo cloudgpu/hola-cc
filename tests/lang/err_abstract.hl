@@ -1,0 +1,4 @@
+// expect: abstract
+func main() {
+    println(coder.ask("hi"))
+}

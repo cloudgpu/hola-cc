@@ -1,0 +1,12 @@
+hello world
+x = 5
+fib(20) = 6765
+total 2 0.3333333333333333
+p(30,4)
+len 5 sum-without-second 20
+a-b-c 3 true ABC
+[{"x":1,"y":2,"label":"a"},{"x":5,"y":6,"label":"b"}]
+ok true true 43 3
+104 101 121
+n 5 2 -5
+from-shell 0

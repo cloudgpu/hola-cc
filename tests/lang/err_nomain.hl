@@ -1,0 +1,2 @@
+// expect: no func main
+func helper() {}

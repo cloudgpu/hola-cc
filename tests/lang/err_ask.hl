@@ -1,0 +1,10 @@
+// expect: needs an agent with one string input
+agent A {
+    input {
+        a int
+        b int
+    }
+}
+func main() {
+    println(A.ask("x"))
+}

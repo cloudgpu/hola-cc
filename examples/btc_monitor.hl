@@ -1,0 +1,48 @@
+// A BTC price monitor, declared rather than programmed. The program says what
+// the agent can do (its tools), what it knows (its skill) and what it is for
+// (its goal). The model runs the loop: it decides when to check, how long to
+// wait, how to read the price out of the API's JSON and when a move matters.
+//
+//   holacc build examples/btc_monitor.hl -o btc_monitor
+//   ./btc_monitor checks=10 interval_seconds=60 alert_percent=0.5
+//   ./btc_monitor --help
+
+// Watching a market: read prices, pass time, tell the user.
+skill market_watch {
+    instructions `Read prices only with btc_price; never invent or estimate a price.
+Wait between checks with wait. Log every check with note, and use alert only for moves that matter.`
+
+    // The live BTC/USD spot price from Coinbase, as JSON ({"data":{"amount":"..."}}).
+    tool btc_price() = http "https://api.coinbase.com/v2/prices/BTC-USD/spot"
+
+    // Waits the given number of seconds, then returns the time.
+    tool wait(seconds int) = sh "sleep {{seconds}} && date +%H:%M:%S"
+
+    // Writes one line to the user's log.
+    tool note(text string) = print "{{text}}"
+
+    // Raises an alert to the user. severity is notable or alert.
+    tool alert(severity string, message string) = print "[{{severity}}] {{message}}"
+}
+
+// Watches the BTC price and alerts on significant moves.
+agent BtcMonitor {
+    persona "You are a calm crypto market monitor. You report price moves plainly and never give trading advice."
+    goal "Check the BTC price `checks` times, `interval_seconds` apart. Alert when the price has moved at least `alert_percent` percent since the previous check, or since the first check. Then report what happened."
+    skills [market_watch]
+    max_turns 200
+    input {
+        checks int "how many price checks to make"
+        interval_seconds int "seconds between checks"
+        alert_percent float "the move, in percent, that deserves an alert"
+    }
+    output {
+        first float "price at the first check, USD"
+        last float "price at the last check, USD"
+        low float "lowest price seen"
+        high float "highest price seen"
+        alerts int "how many alerts were raised"
+        summary string "one or two sentences on how the price moved"
+    }
+    task "Monitor BTC: {{checks}} checks, {{interval_seconds}} seconds apart, alert at {{alert_percent}}%."
+}

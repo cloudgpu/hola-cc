@@ -1,0 +1,37 @@
+// A small agent with a tool written in the language and a typed result.
+// Run: holacc run examples/word_stats.hl -- "some text"
+
+// Answers questions about text, using its own counting tool.
+agent Counter {
+    persona "You answer questions about a text. Use the count_words tool; do not count by hand."
+    input {
+        text string "the text to look at"
+    }
+    output {
+        words int "number of words"
+        longest string "the longest word"
+    }
+    task "How many words are in this text, and which word is the longest?\n\n{{text}}"
+    max_turns 8
+
+    // Counts the words in a text (split on spaces).
+    func count_words(text string) int {
+        n := 0
+        for _, w := range split(trim(text), " ") {
+            if w != "" {
+                n++
+            }
+        }
+        return n
+    }
+}
+
+func main() {
+    text := "the quick brown fox jumps over the extraordinarily lazy dog"
+    if len(args()) > 0 {
+        text = args()[0]
+    }
+    r := Counter{text: text}.run()
+    println("words:", r.words)
+    println("longest:", r.longest)
+}

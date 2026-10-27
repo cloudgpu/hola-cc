@@ -1,0 +1,21 @@
+// Declarative tools only: no functions, no main.
+tool shout(text string) = sh "echo {{text}} | tr a-z A-Z"
+tool save(name string, text string) = write "{{name}}.txt" "{{text}}"
+
+// Helps with small questions.
+agent Helper {
+    persona "You help."
+}
+
+tool ask_helper = agent Helper
+
+// Uses the declared tools.
+agent Binder {
+    tools [shout, save, ask_helper]
+    input {
+        job string
+    }
+    output {
+        result string
+    }
+}

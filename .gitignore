@@ -1,0 +1,8 @@
+build/
+*.ll
+dist/
+
+.hola/snapshots/
+
+.hola/knowledge/
+.hola-adk/

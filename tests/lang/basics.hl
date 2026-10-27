@@ -1,0 +1,67 @@
+package main
+
+type Point struct {
+    x int
+    y int
+    label string
+}
+
+func add(a int, b int) int {
+    return a + b
+}
+
+func fib(n int) int {
+    if n < 2 {
+        return n
+    }
+    return fib(n-1) + fib(n-2)
+}
+
+func describe(p Point) string {
+    return p.label + "(" + str(p.x) + "," + str(p.y) + ")"
+}
+
+func main() {
+    println("hello", "world")
+    x := add(2, 3)
+    println("x =", x)
+    println("fib(20) =", fib(20))
+    var total float = 0
+    for i := 0; i < 4; i++ {
+        total += 0.5
+    }
+    println("total", total, 1.0/3.0)
+    p := Point{x: 3, y: 4, label: "p"}
+    p.x = p.x * 10
+    println(describe(p))
+    nums := []int{5, 1, 4}
+    nums = append(nums, 9, 2)
+    sum := 0
+    for i, n := range nums {
+        if i == 1 {
+            continue
+        }
+        sum += n
+    }
+    println("len", len(nums), "sum-without-second", sum)
+    words := split("a,b,c", ",")
+    println(join(words, "-"), len(words), contains("hello", "ell"), upper("abc"))
+    pts := []Point{Point{x: 1, y: 2, label: "a"}, Point{x: 5, y: 6, label: "b"}}
+    println(json(pts))
+    ok := x > 3 && !(x == 7) || false
+    println("ok", ok, "abc" < "abd", int("42") + 1, float(3))
+    s := ""
+    for _, c := range "hey" {
+        s = s + str(c) + " "
+    }
+    println(trim(s))
+    n := 0
+    for {
+        n++
+        if n >= 5 {
+            break
+        }
+    }
+    println("n", n, 17 % 5, -n)
+    println(trim(sh("echo from-shell")), exit_code())
+}

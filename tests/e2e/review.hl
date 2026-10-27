@@ -1,0 +1,45 @@
+type Finding struct {
+    file string
+    line int
+    text string
+}
+
+// Facts about files, measured instead of guessed.
+skill file_facts {
+    instructions "Use count_lines to measure a file instead of guessing its size."
+
+    // Counts the lines of a file.
+    func count_lines(path string) int {
+        return len(split(trim(read_file(path)), "\n"))
+    }
+}
+
+// Reviews a diff.
+agent Reviewer {
+    skills [file_facts]
+    persona "You review code changes strictly."
+    input {
+        diff string "the unified diff"
+        path string
+    }
+    output {
+        verdict string "approve or reject"
+        lines int
+        findings []Finding
+    }
+    task "Review {{path}}:\n{{diff}}"
+}
+
+agent Summarizer {
+    persona "You summarize."
+}
+
+func main() {
+    r := Reviewer{diff: "+ x := 1", path: args()[0]}.run()
+    println("verdict:", r.verdict)
+    println("lines:", r.lines)
+    for _, f := range r.findings {
+        println("finding:", f.file, f.line, f.text)
+    }
+    println("summary:", Summarizer.ask("say hi"))
+}

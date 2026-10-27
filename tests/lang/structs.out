@@ -1,0 +1,4 @@
+crate 12 true 2 big
+empty: {"name":"","size":null,"open":false,"tags":[]} 0 true
+{"name":"crate","size":{"w":3,"h":4},"open":false,"tags":["wood","big"]}
+2 2 [[1,2],[3]]
